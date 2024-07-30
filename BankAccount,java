@@ -1,0 +1,76 @@
+public class BankAccount{
+    private String accountNumber;
+    private double balance;
+    BankAccount(){
+        accountNumber="";
+        balance=0.0;
+    }
+    BankAccount(String accountNumber,double balace){
+        this.accountNumber=accountNumber;
+        this.balance=balace;
+    }
+    public void deposit(double x){
+        this.balance=this.balance+x;
+    }
+    public void withdraw(double x){
+        if(x>this.balance){
+            System.out.println("You don't have enough balace to withdraw");
+            System.out.println("Available balance is "+this.balance+" only");
+            System.exit(0);
+        }
+        else{
+            this.balance=this.balance-x;
+            System.out.println("Balance in account number "+getAccountNumber()+" after withdrwal is "+getBalance());
+        }
+    }
+    public double getBalance(){
+        return balance;
+    }
+    public String getAccountNumber(){
+        return accountNumber;
+    }
+    public void setAccountNumber(String acno){
+        this.accountNumber=acno;
+    }
+    public void setBalance(double balace){
+        this.balance=balace;
+    }
+}
+ 
+import java.util.Scanner;
+ 
+public class BankAccountSystem {
+   
+    public static void main(String[] args){
+        Scanner sc= new Scanner(System.in);
+        BankAccount ba= new BankAccount();
+        System.out.println("Enter account number: ");
+        ba.setAccountNumber(sc.next());
+        System.out.println("Enter balance");
+        ba.setBalance(sc.nextDouble());
+        System.out.println("Balance in account number "+ba.getAccountNumber()+" is "+ba.getBalance());
+        do{
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Stop");
+            System.out.println("Enter your choice");
+            int choice=sc.nextInt();
+            switch(choice){
+                case 1:
+                    System.out.println("Enter amount to deposit");
+                    ba.deposit(sc.nextDouble());
+                    System.out.println("Balance in account number "+ba.getAccountNumber()+" after deposit is "+ba.getBalance());
+                    break;
+                case 2:
+                    System.out.println("Enter amount to withdraw");
+                    ba.withdraw(sc.nextDouble());
+                    break;
+                case 3:
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+        }
+        }while(true);
+}
+}
+ 
